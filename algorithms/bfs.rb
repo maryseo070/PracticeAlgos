@@ -1,21 +1,35 @@
-# finding the shortest path from "a" to "e"
+# is there a path from a to e?
 
 adjacency_hash = {
-  "a": [b, f],
-  "b": [c],
-  "c": [d, e]
+  "a": ["b", "f"],
+  "b": ["c"],
+  "c": ["d", "e"]
 }
 
-def bfs(adj_hash, start_node, end_node)
+def bfs(adj_hash, start_node, target_node)
   visited_queue = [start_node]
 
-  while visited_queue.length > 0
-    current_node = visited_queue.pop
+  loop do
 
-    children = adj_hash[current_node]
-    children.each do |child|
-      visited_queue.push(child)
+    current = visited_queue.shift
+    children = adj_hash[current.to_sym]
+
+    if children.nil?
+      current = visited_queue.shift
+      # puts visited_queue
+    else
+      children.each do |child|
+        if child == target_node
+          return true
+        else
+          visited_queue.push(child)
+
+        end
+      end
+      current = visited_queue.shift
+
     end
+    return false
   end
 end
 
