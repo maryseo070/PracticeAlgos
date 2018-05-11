@@ -16,14 +16,14 @@ function bfs(adjHash, start, target) {
     if (children) {
       children.forEach(child => {
         visitQueue.push(child);
-        console.log(visitQueue.length)
+        console.log(visitQueue.length);
 
         if (child === target) {
           found = true;
         }
       });
     }
-    console.log(visitQueue.length)
+    console.log(visitQueue.length);
   }
   return found;
 }
