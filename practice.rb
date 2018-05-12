@@ -20,23 +20,21 @@ def to_roman(num)
       twice_less_than = arabic_nums[first_lower_idx - 2]
       greater_than = arabic_nums[first_lower_idx - 1]
       num2 = num - (num % less_than)
-      debugger
 
+      debugger
     if !(is_power_of_ten?(greater_than))
       if greater_than - num2 == less_than
         letters.concat(romans[less_than])
         letters.concat(romans[greater_than])
         to_subtract = greater_than - less_than
         num = num - to_subtract
-        debugger
+
       else
         times = (num / less_than)
         times.times do
-          letters.concat(less_than)
+          letters.concat(romans[less_than])
           num -= less_than
         end
-        letters.concat(num % less_than)
-        num -= (num % less_than)
       end
       result.concat(letters)
 
@@ -48,12 +46,12 @@ def to_roman(num)
       else
         times = (num / less_than)
         times.times do
-          letters.concat(less_than)
+          letters.concat(romans[less_than])
           num -= (times * less_than)
         end
         times = num / twice_less_than
         times.times do |x|
-          letters.concat(twice_less_than)
+          letters.concat(romans[twice_less_than])
           num -= (times * twice_less_than)
         end
       end
@@ -98,9 +96,9 @@ def to_roman_short(number)
     }
    result = ""
    roman_mapping.keys.each do |divisor|
-     quotient, modulus = number.divmod(divisor)
+     quotient, mod = number.divmod(divisor)
      result << roman_mapping[divisor] * quotient
-     number = modulus
+     number = mod
    end
    result
  end
